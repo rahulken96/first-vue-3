@@ -22,10 +22,19 @@
             <p v-if="isStock">Tersedia</p>
             <p v-else="isStock">Stok Kosong</p>
 
-            <p v-show="isVisible">Ini adalah game perang-perangan</p>
-
-            <p v-if="isSale" style="color: blue;">Dijual</p>
-            <p v-else-if="!isSale" style="color: red;">Tidak Diperjualkan !</p>
+            <p>Sekuel dari series ini :</p>
+            <ul>
+              <li v-for="sequel in sequels">
+                {{ sequel }}
+              </li>
+            </ul>
+            
+            <p>Macam - macam series lainnya :</p>
+            <ul>
+              <li v-for="seri in series" :key="seri.id">
+                ID: {{ seri.id }} - {{ seri.name }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
