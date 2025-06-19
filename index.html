@@ -5,7 +5,7 @@
     <title>Vue Mastery</title>
     <!-- Import Styles -->
     <link rel="stylesheet" href="./assets/styles.css" />
-    <!-- Import Vue.js -->
+    <!-- Import Vue.js --> 
     <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
   </head>
   <body>
@@ -21,9 +21,9 @@
             <h1>{{ game }}</h1>
             <p v-if="isStock">Tersedia</p>
             <p v-else="isStock">Stok Kosong</p>
-            
+
             <p v-show="isVisible">Ini adalah game perang-perangan</p>
-            
+
             <p v-if="isSale" style="color: blue;">Dijual</p>
             <p v-else-if="!isSale" style="color: red;">Tidak Diperjualkan !</p>
           </div>
