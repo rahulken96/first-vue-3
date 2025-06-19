@@ -3,7 +3,7 @@ const app = Vue.createApp({
     return {
       game: 'Call Of Duty',
       image: './assets/images/cod_satu.jpg',
-      isStock: true,
+      isStock: false,
       isVisible: false,
       isSale: true,
     }
