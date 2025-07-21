@@ -5,7 +5,7 @@
     <title>Vue Mastery</title>
     <!-- Import Styles -->
     <link rel="stylesheet" href="./assets/styles.css" />
-    <!-- Import Vue.js --> 
+    <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
   </head>
   <body>
@@ -13,13 +13,15 @@
       <div class="nav-bar"></div>
       <div class="cart">
         Cart ({{ cart }})
-        <button class="btn-sm" v-if="cart > 0" v-on:click="decrementCart()"> - Kurang</button>
-      </div>      
-      
+        <button class="btn-sm" v-if="cart > 0" v-on:click="decrementCart()">
+          - Kurang
+        </button>
+      </div>
+
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
-            <img :src="image">
+            <img :src="image" :class="{'out-of-stock-img': game === 'Call Of Duty'}"/>
           </div>
           <div class="product-info">
             <h1>{{ game }}</h1>
@@ -28,22 +30,32 @@
 
             <p>Sekuel dari series ini :</p>
             <ul>
-              <li v-for="sequel in sequels" 
-                :key="sequel.id" 
-                @mouseover="updateImage(sequel.image)"
-                style="cursor: pointer;"
+              <li
+                v-for="sequel in sequels"
+                :key="sequel.id"
+                @mouseover="updateImage(sequel)"
+                style="cursor: pointer"
+                :style="{backgroundColor: sequel.color}"
+                class="color-circle"
               >
                 {{ sequel.name }}
               </li>
             </ul>
-            
+
             <p>Macam - macam series lainnya :</p>
             <ul>
               <li v-for="seri in series" :key="seri.id">
                 ID: {{ seri.id }} - {{ seri.name }}
               </li>
             </ul>
-            <button class="button" v-on:click="addToCart()">+ Tambah</button>
+            <button
+              class="button"
+              v-on:click="addToCart()"
+              :class="{disabledButton: !isStock}"
+              :disabled="!isStock"
+            >
+              + Tambah
+            </button>
           </div>
         </div>
       </div>
@@ -54,7 +66,7 @@
 
     <!-- Mount -->
     <script>
-      const mountedApp = app.mount('#app')
+      const mountedApp = app.mount("#app");
     </script>
   </body>
 </html>
