@@ -21,10 +21,10 @@
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
-            <img :src="image" :class="{'out-of-stock-img': game === 'Call Of Duty'}"/>
+            <img :src="image" :class="{'out-of-stock-img': !isStock && isLoaded}"/>
           </div>
           <div class="product-info">
-            <h1>{{ game }}</h1>
+            <h1>{{ title }}</h1>
             <p v-if="isStock">Tersedia</p>
             <p v-else="isStock">Stok Kosong</p>
 
