@@ -12,5 +12,8 @@ const app = Vue.createApp({
     updateCart() {
       this.cart += 1
     },
+    decrementCart() {
+      this.cart -= 1
+    },
   },
 })
