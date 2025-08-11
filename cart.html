@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - Game Store</title>
+  <meta name="description" content="Your shopping cart">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <link rel="icon" href="./assets/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="cart-app">
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-brand">
+          <i class="fas fa-gamepad"></i>
+          Game Store
+        </a>
+        <div class="nav-menu">
+          <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="cart.html" class="nav-link active">
+            <i class="fas fa-shopping-cart"></i> Cart
+            <span v-if="cartItems.length" class="cart-badge">{{ cartItems.length }}</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="cart-detail">
+      <h2>Shopping Cart Detail</h2>
+      <table class="cart-table" v-if="groupedItems.length">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in groupedItems" :key="item.id">
+            <td>{{ index + 1 }}</td>
+            <td><img :src="item.image" class="cart-item-image"></td>
+            <td>{{ item.name }}</td>
+            <td class="quantity-cell">
+              <div class="quantity-control">
+                <button 
+                  class="btn-round" 
+                  @click="updateQuantity(item.id, -1)" 
+                  title="Kurangi"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <span class="quantity-display">{{ item.quantity || 1 }}</span>
+                <button 
+                  class="btn-round" 
+                  @click="updateQuantity(item.id, 1)" 
+                  title="Tambah"
+                  :disabled="item.quantity >= item.qty"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </td>
+            <td>Rp {{ formatPrice(item.price) }}</td>
+            <td>Rp {{ formatPrice(item.price * item.quantity) }}</td>
+            <td>
+              <button class="btn-round delete" @click="removeItem(item.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">Total:</td>
+            <td colspan="2">Rp {{ totalPrice }}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div v-else class="empty-cart">
+        <p>Your cart is empty</p>
+      </div>
+      <a href="index.html" class="button">
+        <i class="fas fa-arrow-left"></i> Back to Shop
+      </a>
+    </div>
+  </div>
+
+  <script src="./components/CartApp.js"></script>
+  <script>
+    const cartApp = app.mount('#cart-app');
+  </script>
+</body>
+</html>

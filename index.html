@@ -1,37 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Vue Mastery</title>
-    <!-- Import Styles -->
-    <link rel="stylesheet" href="./assets/styles.css" />
-    <!-- Import Vue.js -->
-    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
-  </head>
-  <body>
-    <div id="app">
-      <div class="nav-bar"></div>
-      <div class="cart">
-        Cart ({{ cart }})
-        <button class="btn-sm" v-if="cart > 0" v-on:click="decrementCart()">
-          - Kurang
-        </button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Mastery - Game Store</title>
+  <meta name="description" content="Game Store - Your one-stop shop for Call of Duty games">
+  <meta name="keywords" content="games, call of duty, gaming store">
+  <!-- Import Styles -->
+  <link rel="stylesheet" href="./assets/styles.css">
+  <link rel="icon" href="./assets/favicon.ico">
+  <!-- Import Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Import SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Import Vue.js -->
+  <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-brand">
+          <i class="fas fa-gamepad"></i>
+          Kenz's Game
+        </a>
+        <div class="nav-menu">
+          <a href="index.html" class="nav-link active">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="cart.html" class="nav-link">
+            <i class="fas fa-shopping-cart"></i> Cart
+            <span v-if="cartItems.length" class="cart-badge">{{ cartItems.length }}</span>
+          </a>
+        </div>
       </div>
-
-      <product-display :premium="premium" @add-to-cart="updateCart()"></product-display>
-      <product-detail></product-detail>
+    </nav>
+    
+    <!-- Cart Section -->
+    <div class="cart">
+      <i class="fas fa-shopping-cart"></i>
+      <span>Cart ({{ cartItems.length }})</span>
+      <button 
+        class="btn-sm" 
+        v-if="cartItems.length > 0" 
+        @click.stop="decrementCart"
+        title="Remove last item from cart"
+      >
+        <i class="fas fa-minus"></i>
+      </button>
     </div>
 
-    <!-- Import Js -->
-    <script src="./main.js"></script>
+    <!-- Dynamic Component -->
+    <component 
+      :is="currentView"
+      :premium="premium" 
+      @add-to-cart="updateCart"
+      ref="productDisplay"
+    ></component>
+  </div>
 
-    <!-- Import Components -->
-    <script src="./components/ProductDisplay.js"></script>
-    <script src="./components/ProductDetail.js"></script>
-
-    <!-- Mount -->
-    <script>
-      const mountedApp = app.mount("#app");
-    </script>
-  </body>
+  <!-- Import Scripts -->
+  <script src="./main.js"></script>
+  <script src="./components/ProductDisplay.js"></script>
+  <script src="./components/ProductDetail.js"></script>
+  <script src="./components/CartDetail.js"></script>
+  
+  <!-- Mount App -->
+  <script>
+    const mountedApp = app.mount('#app');
+  </script>
+</body>
 </html>
