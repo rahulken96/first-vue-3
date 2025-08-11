@@ -16,18 +16,23 @@ app.component('product-detail', {
     
     <p>Biaya Ongkos : {{ shipping }}</p>
     <p>Sekuel dari series ini :</p>
-    <ul>
-      <li
+    <div class="sequel-list">
+      <div
         v-for="sequel in sequels"
         :key="sequel.id"
-        @mouseover="$emit('update-image', sequel)"
-        style="cursor: pointer"
-        :style="{backgroundColor: sequel.color}"
-        class="color-circle"
+        class="sequel-item"
       >
-        {{ sequel.name }}
-      </li>
-    </ul>
+        <button
+          class="color-btn"
+          :style="{ backgroundColor: sequel.color }"
+          @mouseover="$emit('update-image', sequel)"
+        >
+          {{ sequel.name }}
+          <span class="qty-badge" v-if="sequel.qty > 0">{{ sequel.qty }}</span>
+          <span class="qty-badge sold-out" v-else>Habis</span>
+        </button>
+      </div>
+    </div>
 
     <p>Macam - macam series lainnya :</p>
     <ul>

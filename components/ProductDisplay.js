@@ -9,8 +9,10 @@ app.component('product-display', {
   /* html */
   `<div class="product-display">
       <div class="product-container">
-        <div class="product-image">
-          <img :src="image" :class="{'out-of-stock-img': !isStock && isLoaded}"/>
+        <div class="product-image-container">
+          <div class="image-frame">
+            <img :src="image" :class="{'out-of-stock-img': !isStock && isLoaded}"/>
+          </div>
         </div>
         
         <!-- Kirim props + event handler ke product-detail -->

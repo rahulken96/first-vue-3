@@ -13,13 +13,15 @@
       <div class="nav-bar"></div>
       <div class="cart">
         Cart ({{ cart }})
-        <button class="btn-sm" v-if="cart > 0" v-on:click="decrementCart()">
+        <button class="btn-sm" v-if="cart > 0" @click="decrementCart">
           - Kurang
         </button>
       </div>
 
-      <product-display :premium="premium" @add-to-cart="updateCart()"></product-display>
-      <product-detail></product-detail>
+      <product-display 
+        :premium="premium" 
+        @add-to-cart="updateCart"
+      ></product-display>
     </div>
 
     <!-- Import Js -->
@@ -31,7 +33,7 @@
 
     <!-- Mount -->
     <script>
-      const mountedApp = app.mount("#app");
+      const mountedApp = app.mount('#app')
     </script>
   </body>
 </html>
